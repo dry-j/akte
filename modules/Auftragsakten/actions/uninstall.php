@@ -1,4 +1,6 @@
-class Auftragsakten_UninstallAuftragsakten_Action extends Settings_Vtiger_Basic_Action {
+<?php 
+    
+      class Auftragsakten_UninstallAuftragsakten_Action extends Settings_Vtiger_Basic_Action {
 
     function __construct() {
         parent::__construct();
