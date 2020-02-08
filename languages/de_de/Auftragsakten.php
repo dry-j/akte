@@ -9,8 +9,8 @@
  *************************************************************************************/
 
 $languageStrings = array(
-    'LBL_SIMPLEEXTENSION_AUFTRAGSAKTEN_MSG' => 'Hallo WRAPTEC!',
-    'LBL_SIMPLEEXTENSION_AUFTRAGSAKTEN_DESC' => 'Dieser Text wurde aus dem language (de_de) - Ordner übersetzt'
+    'Hello World' => 'Hallo WRAPTEC!',
+    'LBL_WELCOME' => '>Willkommmen  -  Dieser Text wurde aus dem language (de_de) - Ordner übersetzt'
 );
 
 $jsLanguageStrings = array();
