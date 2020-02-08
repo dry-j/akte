@@ -9,8 +9,8 @@
  *************************************************************************************/
 
 $languageStrings = array(
-    'LBL_SIMPLEEXTENSION_HELLO_WORLD_MSG' => 'Hallo Welt!',
-    'LBL_SIMPLEEXTENSION_HELLO_WORLD_DESC' => 'Dieser Text wurde aus dem language Ordner übersetzt'
+    'LBL_SIMPLEEXTENSION_AUFTRAGSAKTEN_MSG' => 'Hallo WRAPTEC!',
+    'LBL_SIMPLEEXTENSION_AUFTRAGSAKTEN_DESC' => 'Dieser Text wurde aus dem language (de_de) - Ordner übersetzt'
 );
 
 $jsLanguageStrings = array();
