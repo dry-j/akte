@@ -19,18 +19,45 @@ $moduleInstance->addLink(<DETAILVIEWWIDGET>, <aUFTRAGSAKTEN>, <tESTAKTE>);
      * @param String Module name
      * @param String Event Type
      */
-    function vtlib_handler($moduleName, $eventType) {
+    function vtlib_handler($moduleName, $event_type) {
+        global $adb;
+        $moduleInstance = Vtiger_Module::getInstance($moduleName);
+        if($event_type == 'module.postinstall') {
 
-        echo "<h1>Module installed</h1>";
+            $this->createSettingField();
 
-        if($eventType == 'module.postinstall') {
-            // TODO add relevant code here
+            // Initialize settings
+            $path = "INSERT INTO vtiger_auftragsakten VALUES
+                ('comp_path', '')";
+            $adb->pquery($sql,array());
 
-            echo "Module postinstall";
-        }
+            // Register Widget
+            if($moduleInstance) {
+                $moduleInstance->addLink('DETAILVIEWWIDGET', 'Auftragsakten', 'template/views/List.php');
+            }
+          
+        } else if($event_type == 'module.disabled') {
 
-        if ($eventType == 'module.enabled') {
+            // Unregister Widget
+            if($moduleInstance) {
+                $moduleInstance->deleteLink('DETAILVIEWWIDGET', 'Auftragsakten', 'template/views/List.php');
+            }
+            
+             $AccountsInstance = Vtiger_Module::getInstance('Accounts');
+            Vtiger_Event::unregister($AccountsInstance, 'vtiger.entity.aftersave', 'AuftragsaktenHandler', 'modules/Auftragsakten/Auftragsakten.php');
 
+            echo "Module disabled";
+
+            // There is no vtlib method so direct DB update
+            $adb->pquery('UPDATE vtiger_settings_field SET active = 1 WHERE name = ?',array('Auftragsakten'));
+
+        } else if($event_type == 'module.enabled') {
+       if ($eventType == 'module.enabled') {
+           
+            // Register Widget
+            if($moduleInstance) {
+                $moduleInstance->addLink('DETAILVIEWWIDGET', 'Auftragsakten', 'template/views/List.php');
+            }
             // Register an event handler for the Accounts module for the aftersave event
             $AccountsInstance = Vtiger_Module::getInstance('Accounts');
             Vtiger_Event::register($AccountsInstance, 'vtiger.entity.aftersave', 'AuftragsaktenHandler', 'modules/Auftragsakten/Auftragsakten.php');
@@ -38,33 +65,18 @@ $moduleInstance->addLink(<DETAILVIEWWIDGET>, <aUFTRAGSAKTEN>, <tESTAKTE>);
             echo "Module enabled";
         }
 
-      
-       if($eventType == 'module.disabled') {
-            // TODO add relevant code here
+            // There is no vtlib method so direct DB update
+            $adb->pquery('UPDATE vtiger_settings_field SET active = 0 WHERE name = ?',array('Auftragsakten'));
 
-            echo "Module disabled";
+            // Enable additional fields
+           
+        } else if($event_type == 'module.preuninstall') {
+            // TODO Handle actions when this module is about to be deleted.
+        } else if($event_type == 'module.preupdate') {
+            // TODO Handle actions before this module is updated.
+        } else if($event_type == 'module.postupdate') {
+            // TODO Handle actions after this module is updated.
         }
-
-        if ($eventType == 'module.disabled') {
-
-            // Register an event handler for the Accounts module for the aftersave event
-            $AccountsInstance = Vtiger_Module::getInstance('Accounts');
-            Vtiger_Event::unregister($AccountsInstance, 'vtiger.entity.aftersave', 'AuftragsaktenHandler', 'modules/Auftragsakten/Auftragsakten.php');
-
-            echo "Module enabled";
-        }
-        /*
-         * Event types you can use
-         *
-         * module.enabled - Handle actions when this module is enabled.
-         * module.disabled - Handle actions when this module is disabled.
-         * module.preuninstall - Handle actions when this module is about to be deleted.
-         * module.preupdate - Handle actions before this module is updated.
-         * module.postupdate - Handle actions after this module is updated.
-         */
 
     }
-
-}
-
  
