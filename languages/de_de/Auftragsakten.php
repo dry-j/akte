@@ -9,7 +9,7 @@
  *************************************************************************************/
 
 $languageStrings = array(
-    'Hello World' => 'Hallo WRAPTEC!',
+    'Hello World' => 'Hallo bei WRAPTEC!',
     'LBL_WELCOME' => '>Willkommmen  -  Dieser Text wurde aus dem language (de_de) - Ordner übersetzt'
 );
 
