@@ -8,7 +8,7 @@
  * If you have any questions or comments, please email: info@j-droste.de
  ************************************************************************************/
  
- class Akten_List_View extends Vtiger_Index_View {
+ class Auftragsakten_List_View extends Vtiger_Index_View {
 
         public function process(Vtiger_Request $request) {
                 $viewer = $this->getViewer($request);
